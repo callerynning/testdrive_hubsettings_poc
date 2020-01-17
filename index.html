@@ -1,0 +1,437 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="en"> 
+
+	<head> 
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+		<title>Testdrive Preview</title> 
+
+		<style>
+			.time{
+				font-size: 10px;
+			}
+			.slot_text{
+				margin: auto;
+    			text-align: center;
+			}
+			.time_top{
+				position: absolute;
+  				top: 0;
+  				left: 10px;
+			}
+			.time_bottom{
+				position: absolute;
+  				bottom: 0;
+  				left: 10px;
+			}
+			.slot{
+				position: relative;
+				text-align: center;
+				display: flex;
+    			margin: auto;
+			}
+			.timeslot{
+				margin:10px;
+			}
+			.slacktime{
+				background-color: red
+			}
+			.drivetime_slot{
+				background-color: yellow
+			}
+			.testdrive_slot{
+				background-color: orange
+			}
+			.buffer_slot{
+				background-color: green
+			}
+		</style>
+	</head> 
+
+	<body> 
+		<div class="summary" style="width: 1000px;">
+			
+		
+			<div class="selectors" style="float: left; width: 500px;">
+				<label for="opening">Hub Opening</label>
+				<select id="opening" name="opening" onchange="reCalculate()">
+				  	<option value="300">5:00 AM</option>
+					<option value="315">5:15 AM</option>
+					<option value="330">5:30 AM</option>
+					<option value="345">5:45 AM</option>
+					 
+					<option value="360">6:00 AM</option>
+					<option value="375">6:15 AM</option>
+					<option value="390">6:30 AM</option>
+					<option value="405">6:45 AM</option>
+					 
+					<option value="420">7:00 AM</option>
+					<option value="435">7:15 AM</option>
+					<option value="450">7:30 AM</option>
+					<option value="465">7:45 AM</option>
+					 
+					<option value="480" selected="selected">8:00 AM</option>
+					<option value="495">8:15 AM</option>
+					<option value="510">8:30 AM</option>
+					<option value="525">8:45 AM</option>
+					 
+					<option value="540" >9:00 AM</option>
+					<option value="555">9:15 AM</option>
+					<option value="570">9:30 AM</option>
+					<option value="585">9:45 AM</option>
+					 
+					<option value="600">10:00 AM</option>
+					<option value="615">10:15 AM</option>
+					<option value="630">10:30 AM</option>
+					<option value="645">10:45 AM</option>
+					 
+					<option value="660">11:00 AM</option>
+					<option value="675">11:15 AM</option>
+					<option value="690">11:30 AM</option>
+					<option value="705">11:45 AM</option>
+					 
+					<option value="720">12:00 PM</option>
+					<option value="735">12:15 PM</option>
+					<option value="750">12:30 PM</option>
+					<option value="765">12:45 PM</option>
+					 
+					<option value="780">1:00 PM</option>
+					<option value="795">1:15 PM</option>
+					<option value="810">1:30 PM</option>
+					<option value="825">1:45 PM</option>
+					 
+					<option value="840">2:00 PM</option>
+					<option value="855">2:15 PM</option>
+					<option value="870">2:30 PM</option>
+					<option value="885">2:45 PM</option>
+					 
+					<option value="900">3:00 PM</option>
+					<option value="915">3:15 PM</option>
+					<option value="930">3:30 PM</option>
+					<option value="945">3:45 PM</option>
+					 
+					<option value="960">4:00 PM</option>
+					<option value="975">4:15 PM</option>
+					<option value="990">4:30 PM</option>
+					<option value="1005">4:45 PM</option>
+					 
+					<option value="1020">5:00 PM</option>
+					<option value="1035">5:15 PM</option>
+					<option value="1050">5:30 PM</option>
+					<option value="1065">5:45 PM</option>
+					 
+				</select>
+				<br>
+				<label for="closing">Hub Closing</label>
+				<select id="closing" name="closing" onchange="reCalculate()">
+					 
+					<option value="720">12:00 PM</option>
+					<option value="735">12:15 PM</option>
+					<option value="750">12:30 PM</option>
+					<option value="765">12:45 PM</option>
+					 
+					<option value="780">1:00 PM</option>
+					<option value="795">1:15 PM</option>
+					<option value="810">1:30 PM</option>
+					<option value="825">1:45 PM</option>
+					 
+					<option value="840">2:00 PM</option>
+					<option value="855">2:15 PM</option>
+					<option value="870">2:30 PM</option>
+					<option value="885">2:45 PM</option>
+					 
+					<option value="900">3:00 PM</option>
+					<option value="915">3:15 PM</option>
+					<option value="930">3:30 PM</option>
+					<option value="945">3:45 PM</option>
+					 
+					<option value="960">4:00 PM</option>
+					<option value="975">4:15 PM</option>
+					<option value="990">4:30 PM</option>
+					<option value="1005">4:45 PM</option>
+					 
+					<option value="1020" selected="selected">5:00 PM</option>
+					<option value="1035">5:15 PM</option>
+					<option value="1050">5:30 PM</option>
+					<option value="1065">5:45 PM</option>
+					 
+					<option value="1080">6:00 PM</option>
+					<option value="1095">6:15 PM</option>
+					<option value="1110">6:30 PM</option>
+					<option value="1125">6:45 PM</option>
+					 
+					<option value="1140">7:00 PM</option>
+					<option value="1155">7:15 PM</option>
+					<option value="1170">7:30 PM</option>
+					<option value="1185">7:45 PM</option>
+					 
+					<option value="1200">8:00 PM</option>
+					<option value="1215">8:15 PM</option>
+					<option value="1230">8:30 PM</option>
+					<option value="1245">8:45 PM</option>
+					 
+					<option value="1260">9:00 PM</option>
+					<option value="1275">9:15 PM</option>
+					<option value="1290">9:30 PM</option>
+					<option value="1305">9:45 PM</option>
+					 
+					<option value="1320">10:00 PM</option>
+					<option value="1335">10:15 PM</option>
+					<option value="1350">10:30 PM</option>
+					<option value="1365">10:45 PM</option>
+					 
+					<option value="1380">11:00 PM</option>
+					<option value="1395">11:15 PM</option>
+					<option value="1410">11:30 PM</option>
+					<option value="1425">11:45 PM</option>
+				</select>
+
+				<br>
+
+				<label for="duration">Testdrive duration</label>
+				<select id="duration" name="duration" onchange="reCalculate()">
+					<option value="15">15 min</option>
+					<option value="30">30 min</option>
+					<option value="45">45 min</option>
+					 
+					<option value="60" selected="selected">1h</option>
+					<option value="75">1h 15 min</option>
+					<option value="90">1h 30 min</option>
+				</select>
+
+				<br>
+				
+				<label for="reach">Reach</label>
+				<select id="reach" name="reach" onchange="reCalculate()">
+				  	<option value="0">0 min</option>
+					<option value="15">15 min</option>
+					<option value="30" selected="selected">30 min</option>
+					<option value="45">45 min</option>
+					 
+					<option value="60">1h</option>
+					<option value="75">1h 15 min</option>
+					<option value="90">1h 30 min</option>
+					<option value="105">1h 45 min</option>
+
+					<option value="120">2h</option>
+					<option value="135">2h 15 min</option>
+					<option value="150">2h 30 min</option>
+					<option value="165">2h 45 min</option>
+
+					<option value="180">3h</option>
+				</select>
+				
+				<br>
+				
+				<label for="buffer">Buffer</label>
+				<select id="buffer" name="buffer" onchange="reCalculate()">
+				  	<option value="0">0 min</option>
+					<option value="15">15 min</option>
+					<option value="30" selected="selected">30 min</option>
+					<option value="45">45 min</option>
+					 
+					<option value="60">1h</option>
+					<option value="75">1h 15 min</option>
+					<option value="90">1h 30 min</option>
+					<option value="105">1h 45 min</option>
+
+					<option value="120">2h</option>
+					<option value="135">2h 15 min</option>
+					<option value="150">2h 30 min</option>
+					<option value="165">2h 45 min</option>
+
+					<option value="180">3h</option>
+				</select>
+			</div>
+
+			<div class="results" style="float: left; width: 500px;">
+				<br>
+				Time slots: <span id=data_timeslots>3</span>
+				<br>
+				Slot size: <span id="data_slotsize">120</span>
+				<br>
+				Slack time: <span id="data_slacktime">90</span> min
+				<br>
+				Max utilisation: <span id="data_util">83</span>%
+			</div>
+		</div>
+		
+		<br style="clear: left;">
+		<br>
+		<div id="dayslot" style="width: 300px; background-color: blue;padding-top: 10px; padding-bottom: 10px;">
+			<div class="timeslot">
+				<div class="slot drivetime_slot" style="height:30px;">
+					<span class="time time_top">08:00</span> 
+					<span class="slot_text">Drive time</span> 
+					<span class="time time_bottom">08:30</span>
+				</div>
+				<div class="slot testdrive_slot" style="height:60px;">
+					<span class="time time_top">08:30</span> 
+					<span class="slot_text">Test drive</span> 
+					<span class="time time_bottom">09:30</span> 
+				</div>
+				<div class="slot drivetime_slot" style="height:30px;">
+					<span class="time time_top">09:30</span> 
+					<span class="slot_text">Drive time</span> 
+					<span class="time time_bottom">10:00</span> 
+				</div>
+				<div class="slot buffer_slot" style="height:30px;">
+					<span class="time time_top">10:00</span> 
+					<span class="slot_text">Buffer</span> 
+					<span class="time time_bottom">10:30</span> 
+				</div>
+			</div>
+			<div class="timeslot" style="">
+				<div class="slot drivetime_slot" style="height:30px;">
+					<span class="time time_top">10:30</span> 
+					<span class="slot_text">Drive time</span> 
+					<span class="time time_bottom">11:00</span>
+				</div>
+				<div class="slot testdrive_slot" style="height:60px;">
+					<span class="time time_top">11:00</span> 
+					<span class="slot_text">Test drive</span> 
+					<span class="time time_bottom">12:00</span> 
+				</div>
+				<div class="slot drivetime_slot" style="height:30px;">
+					<span class="time time_top">12:00</span> 
+					<span class="slot_text">Drive time</span> 
+					<span class="time time_bottom">12:30</span> 
+				</div>
+				<div class="slot buffer_slot" style="height:30px;">
+					<span class="time time_top">12:30</span> 
+					<span class="slot_text">Buffer</span> 
+					<span class="time time_bottom">13:00</span> 
+				</div>
+			</div>
+			<div class="timeslot">
+				<div class="slot drivetime_slot" style="height:30px;">
+					<span class="time time_top">13:00</span> 
+					<span class="slot_text">Drive time</span> 
+					<span class="time time_bottom">13:30</span>
+				</div>
+				<div class="slot testdrive_slot" style="height:60px;">
+					<span class="time time_top">13:30</span> 
+					<span class="slot_text">Test drive</span> 
+					<span class="time time_bottom">14:30</span> 
+				</div>
+				<div class="slot drivetime_slot" style="height:30px;">
+					<span class="time time_top">14:30</span> 
+					<span class="slot_text">Drive time</span> 
+					<span class="time time_bottom">15:00</span> 
+				</div>
+				<div class="slot buffer_slot" style="height:30px;">
+					<span class="time time_top">15:00</span> 
+					<span class="slot_text">Buffer</span> 
+					<span class="time time_bottom">15:30</span> 
+				</div>
+			</div>
+			<div class="timeslot">
+				<div class="slot slacktime" style="height:90px;">
+					<span class="time time_top">15:30</span> 
+					<span class="slot_text">Slack time</span> 
+					<span class="time time_bottom">17:00</span>
+				</div>
+			</div>
+
+		</div>
+		
+	</body> 
+
+	<script>
+	
+	function reCalculate(){
+		var opening = Number(document.getElementById("opening").value);
+		var closing = Number(document.getElementById("closing").value);
+		var duration = Number(document.getElementById("duration").value);
+		var reach = Number(document.getElementById("reach").value);
+		var buffer = Number(document.getElementById("buffer").value);
+
+		var slotsize = duration + (reach * 2) + buffer;
+		var slotsizeHours = Math.floor(slotsize/60);;
+		var slotsizeMinutes = slotsize % 60;
+		var totalOpeningMinutes = closing - opening;
+		var openingHours = Math.floor(totalOpeningMinutes/60);
+		var openingMinutes = totalOpeningMinutes % 60;
+
+		var timeslots = Math.floor(totalOpeningMinutes/slotsize);
+
+		console.log("timeslots: " + timeslots);
+
+		var slack = totalOpeningMinutes % slotsize;
+		console.log("slack: " + slack);
+
+		document.getElementById("data_timeslots").innerHTML = timeslots;
+		document.getElementById("data_slotsize").innerHTML = slotsizeHours + "h " + slotsizeMinutes + " min";
+		document.getElementById("data_slacktime").innerHTML = slack;
+		document.getElementById("data_util").innerHTML = Math.round((slotsize * timeslots / totalOpeningMinutes) * 100 *10 ) / 10 // * 10 / 10 to get one decimal
+		var dayslot = document.getElementById("dayslot");
+		dayslot.innerHTML = "";
+		//document.getElementById("dayslot").innerHTML = element.innerHTML + "additional HTML code";
+
+		//add time slots
+		for (var i = 0; i < timeslots; i++) {
+			var start = opening + (slotsize * i);
+			dayslot.innerHTML = dayslot.innerHTML + getTimeslot(start, duration, reach, buffer);
+		}
+
+		//add slack
+		if(slack > 0)
+			dayslot.innerHTML = dayslot.innerHTML + getSlackTimeslot(closing - slack, closing)
+	};
+
+	function prettyTime(minutesSinceMidnight) {
+		var hours = Math.floor(minutesSinceMidnight/60);
+		if(hours < 10)
+			hours = "0" + hours;
+		var minutes = minutesSinceMidnight % 60;
+		if (minutes < 15)
+			minutes = "00";
+
+	  	return hours + ":" + minutes;
+	};
+
+	function getTimeslot(start, duration, reach, buffer) {
+		var html = `
+			  <div class="timeslot">
+				<div class="slot drivetime_slot" style="height:` + Number(reach) + `px;">
+					<span class="time time_top">` + prettyTime(start) + `</span> 
+					<span class="slot_text">Drive time</span> 
+					<span class="time time_bottom">` + prettyTime(start + reach) + `</span>
+				</div>
+				<div class="slot testdrive_slot" style="height:` + Number(duration) + `px;">
+					<span class="time time_top">` + prettyTime(start + reach) + `</span> 
+					<span class="slot_text">Test drive</span> 
+					<span class="time time_bottom">` + prettyTime(start + reach + duration) + `</span> 
+				</div>
+				<div class="slot drivetime_slot" style="height:` + Number(reach) + `px;">
+					<span class="time time_top">` + prettyTime(start + reach + duration) + `</span> 
+					<span class="slot_text">Drive time</span> 
+					<span class="time time_bottom">` + prettyTime(start + reach + duration + reach) + `</span> 
+				</div>
+				<div class="slot buffer_slot" style="height:` + Number(buffer) + `px;">
+					<span class="time time_top">` + prettyTime(start + reach + duration + reach) + `</span> 
+					<span class="slot_text">Buffer</span> 
+					<span class="time time_bottom">` + prettyTime(start + reach + duration + reach + buffer) + `</span> 
+				</div>
+			</div>
+			`;
+	  return html;
+	};
+
+	function getSlackTimeslot(slackStart, slackEnd) {
+		var html = `
+			  <div class="timeslot">
+				<div class="slot slacktime" style="height:` + Number(slackEnd -  slackStart) + `px;">
+					<span class="time time_top">` + prettyTime(slackStart) + `</span> 
+					<span class="slot_text">Slack time</span> 
+					<span class="time time_bottom">` + prettyTime(slackEnd) + `</span>
+				</div>
+			</div>
+			`;
+	  return html;
+	};
+
+	
+
+	</script>
+
+</html>
